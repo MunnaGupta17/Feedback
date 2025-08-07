@@ -5,6 +5,7 @@ import com.getFeedback.repository.UserProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,4 +24,10 @@ public class UserProfileService {
     public Optional<UserProfile> getByUsername(String username) {
         return repository.findByUsername(username);
     }
+    
+    public List<UserProfile> searchProfiles(String query) {
+        return repository.search(query);
+    }
+
+    
 }

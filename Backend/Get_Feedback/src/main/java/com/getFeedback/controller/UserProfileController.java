@@ -3,6 +3,9 @@ package com.getFeedback.controller;
 
 import com.getFeedback.model.UserProfile;
 import com.getFeedback.service.UserProfileService;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,4 +32,11 @@ public class UserProfileController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    
+    @GetMapping("/search")
+    public ResponseEntity<List<UserProfile>> searchProfiles(@RequestParam String query) {
+        return ResponseEntity.ok(service.searchProfiles(query));
+    }
+
+    
 }
