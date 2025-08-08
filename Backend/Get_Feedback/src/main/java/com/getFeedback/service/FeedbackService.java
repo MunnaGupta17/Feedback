@@ -22,6 +22,14 @@ public class FeedbackService {
         UserProfile profile = userProfileRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        // Default anonymous values
+        if (feedback.getAuthorName() == null || feedback.getAuthorName().isBlank()) {
+            feedback.setAuthorName("Anonymous");
+        }
+        if (feedback.getAuthorEmail() != null && feedback.getAuthorEmail().isBlank()) {
+            feedback.setAuthorEmail(null); // optional email
+        }
+
         feedback.setUserProfile(profile);
         feedback.setCreatedAt(java.time.LocalDateTime.now());
         return feedbackRepository.save(feedback);
